@@ -15,6 +15,14 @@ const Home = () => {
       <Head>
         <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
+        <style>
+          {`body {
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            overflow-x: hidden;
+          }`}
+        </style>
       </Head>
 
       <div className="tiesses">
@@ -47,15 +55,23 @@ const Home = () => {
           font-family: sans-serif;
           display: flex;
           justify-content: space-between;
-          width: 100%;
+          width: 100vw;
+          overflow: hidden;
           align-items: center;
           flex-wrap: wrap;
         }
         .tiesses img {
           width: 600px;
+          max-height: 600px;
         }
-        .tiesses img:nth-child(2n) {
+        .tiesses img:nth-child(3n) {
           animation: 4s linear rotation infinite;
+        }
+        .tiesses img:nth-child(3n + 1) {
+          animation: 4s linear rotation reverse infinite;
+        }
+        .tiesses img:nth-child(3n + 2) {
+          animation: 4s linear 1s rotation infinite;
         }
       `}</style>
     </div>
