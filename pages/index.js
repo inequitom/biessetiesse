@@ -38,6 +38,11 @@ const Home = () => {
       </div>
 
       <style jsx>{`
+        @keyframes rotation {
+          100% {
+            transform: rotate(360deg);
+          }
+        }
         .tiesses {
           font-family: sans-serif;
           display: flex;
@@ -48,6 +53,9 @@ const Home = () => {
         }
         .tiesses img {
           width: 600px;
+        }
+        .tiesses img:nth-child(2n) {
+          animation: 4s linear rotation infinite;
         }
       `}</style>
     </div>
