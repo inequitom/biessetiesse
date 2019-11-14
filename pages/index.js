@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import Head from "next/head";
 import tiesses from "../data/tiesses";
 import InfiniteScroll from "react-infinite-scroller";
+import shuffle from "lodash/shuffle";
 
+const shuffledTiesses = shuffle(tiesses);
 const numberOfTiessesLoadedByScroll = 10;
 
 const Home = () => {
-  const [loadedTiesses, changeLoadedTiesses] = useState(
-    tiesses.splice(0, numberOfTiessesLoadedByScroll)
-  );
+  const [loadedTiesses, changeLoadedTiesses] = useState([]);
   const startIndex = loadedTiesses.length;
-  const hasMore = loadedTiesses.length < tiesses.length;
+  const hasMore = loadedTiesses.length < shuffledTiesses.length;
   return (
     <div>
       <Head>
@@ -25,13 +25,12 @@ const Home = () => {
           }`}
         </style>
       </Head>
-
-      <div className="tiesses">
+      {process.browser && (
         <InfiniteScroll
           loadMore={() => {
             changeLoadedTiesses([
               ...loadedTiesses,
-              tiesses.slice(
+              ...shuffledTiesses.slice(
                 startIndex,
                 startIndex + numberOfTiessesLoadedByScroll
               )
@@ -40,15 +39,19 @@ const Home = () => {
           hasMore={hasMore}
           loader={<div key={0}>Chargement de biesses tiesses...</div>}
         >
-          {loadedTiesses.map(filename => (
-            <img key={filename} src={`/tiesses/${filename}`} />
-          ))}
+          <div className="tiesses">
+            {loadedTiesses.map(filename => (
+              <img key={filename} src={`/tiesses/${filename}`} />
+            ))}
+          </div>
         </InfiniteScroll>
-      </div>
+      )}
       {!hasMore && (
         <p>
-          T'veux vire eut'biesse tiesse ichi auchi ? Envoie-la à
-          miauchi@biessetiesse.com
+          <a href="mailto:miauchi@biessetiesse.com?subject=Eum'tiesse">
+            T'veux vire eut'biesse tiesse ichi auchi ? Envoie-la à
+            miauchi@biessetiesse.com
+          </a>
         </p>
       )}
 
@@ -61,7 +64,7 @@ const Home = () => {
         .tiesses {
           font-family: sans-serif;
           display: flex;
-          justify-content: space-between;
+          justify-content: space-around;
           width: 100vw;
           overflow: hidden;
           align-items: center;
