@@ -10,6 +10,7 @@ const Home = () => {
     tiesses.splice(0, numberOfTiessesLoadedByScroll)
   );
   const startIndex = loadedTiesses.length;
+  const hasMore = loadedTiesses.length < tiesses.length;
   return (
     <div>
       <Head>
@@ -36,7 +37,7 @@ const Home = () => {
               )
             ]);
           }}
-          hasMore={loadedTiesses.length < tiesses.length}
+          hasMore={hasMore}
           loader={<div key={0}>Chargement de biesses tiesses...</div>}
         >
           {loadedTiesses.map(filename => (
@@ -44,6 +45,12 @@ const Home = () => {
           ))}
         </InfiniteScroll>
       </div>
+      {!hasMore && (
+        <p>
+          T'veux vire eut'biesse tiesse ichi auchi ? Envoie-la à
+          miauchi@biessetiesse.com
+        </p>
+      )}
 
       <style jsx>{`
         @keyframes rotation {
@@ -72,6 +79,11 @@ const Home = () => {
         }
         .tiesses img:nth-child(3n + 2) {
           animation: 4s linear 1s rotation infinite;
+        }
+        p {
+          margin: 0 auto;
+          text-align: center;
+          padding: 0 0 5em 0;
         }
       `}</style>
     </div>
