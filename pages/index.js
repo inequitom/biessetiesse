@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import shuffle from "lodash/shuffle";
 
 const shuffledTiesses = shuffle(tiesses);
-const numberOfTiessesLoadedByScroll = 10;
+const numberOfTiessesLoadedByScroll = 1;
 
 const Home = () => {
   const [loadedTiesses, changeLoadedTiesses] = useState([]);
@@ -72,7 +72,7 @@ const Home = () => {
         }
         .tiesses img {
           width: 600px;
-          max-height: 600px;
+          height: 600px;
         }
         .tiesses img:nth-child(3n) {
           animation: 4s linear rotation infinite;
